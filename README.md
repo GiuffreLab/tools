@@ -26,8 +26,8 @@ Broom is designed to quickly sweep a subnet for active IP addresses by pinging e
     ```
 
 2. Follow the prompts:
-    - Enter the IP address (e.g., `192.168.1.0`).
-    - Enter the CIDR notation (e.g., `/24`).
+    - Enter the IP address (e.g., `192.168.1.1`).
+    - Enter the subnet mask or CIDR notation (e.g., `255.255.255.0` or `/24`).
 
 ### Example
 
@@ -49,3 +49,38 @@ Active host found: 192.168.1.2
 -------------------------------------------------
 Sweep completed!
 -------------------------------------------------
+```
+
+## Lens
+
+### Description
+
+Lens calculates and displays the network address, broadcast address, and usable host range for a given IP address and either a subnet mask or CIDR notation. This tool is helpful for network planning and management.
+
+### Usage
+
+1. Run the script:
+    ```bash
+    ./lens.py
+    ```
+
+2. Follow the prompts:
+    - Enter the IP address (e.g., `192.168.1.1`).
+    - Enter the subnet mask or CIDR notation (e.g., `255.255.255.0` or `/24`).
+
+### Example
+
+```bash
+$ ./lens.py
+-------------------------------------------------
+Welcome to Lens!
+Run by user_name
+Lens is being run without Root privileges!
+-------------------------------------------------
+Please enter the IP address: 192.168.1.1
+Please enter the subnet mask or CIDR: /24
+The network address is: 192.168.1.0
+The broadcast address is: 192.168.1.255
+Total usable hosts: 254
+The usable host range is: 192.168.1.1 - 192.168.1.254
+```
