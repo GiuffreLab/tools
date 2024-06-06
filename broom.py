@@ -39,7 +39,7 @@ def main():
 
     # Ask for the IP address and CIDR separately
     ip = input(Fore.CYAN + "Please enter the IP address: " + Style.RESET_ALL)
-    cidr = input(Fore.CYAN + "Please enter the CIDR notation: " + Style.RESET_ALL)
+    cidr = input(Fore.CYAN + "Please enter the subnet mask or CIDR: " + Style.RESET_ALL)
     cidr_subnet = f"{ip}/{cidr}"
 
     # Calculate the IP range
