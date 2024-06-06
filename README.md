@@ -39,7 +39,7 @@ Run by user_name
 Broom is being run without Root privileges!
 -------------------------------------------------
 Please enter the IP address: 192.168.1.0
-Please enter the CIDR notation: /24
+Please enter the CIDR notation: 24
 -------------------------------------------------
 Sweeping: 192.168.1.0/24
 -------------------------------------------------
@@ -78,7 +78,7 @@ Run by user_name
 Lens is being run without Root privileges!
 -------------------------------------------------
 Please enter the IP address: 192.168.1.1
-Please enter the subnet mask or CIDR: /24
+Please enter the subnet mask or CIDR: 24
 The network address is: 192.168.1.0
 The broadcast address is: 192.168.1.255
 Total usable hosts: 254
