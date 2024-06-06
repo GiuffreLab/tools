@@ -1,7 +1,10 @@
+#!/usr/bin/env python
+
 import os
 import subprocess
 import ipaddress
 from concurrent.futures import ThreadPoolExecutor
+from colorama import Fore, Style, init
 
 def check_root():
     return os.geteuid() == 0
@@ -26,15 +29,18 @@ def ping_host(ip):
         print(f"Error pinging {ip}: {e}")
 
 def main():
+    init()
     welcome_message()
 
-    # Ask for the subnet in CIDR format
-    cidr_subnet = input("Enter the subnet in CIDR format (e.g., 192.168.1.0/24): ")
-    
+    # Ask for the IP address and CIDR separately
+    ip = input(Fore.CYAN + "Please enter the IP address: " + Style.RESET_ALL)
+    cidr = input(Fore.CYAN + "Please enter the CIDR notation: " + Style.RESET_ALL)
+    cidr_subnet = f"{ip}/{cidr}"
+
     # Calculate the IP range
     network = ipaddress.ip_network(cidr_subnet, strict=False)
     ip_list = list(network.hosts())
-    
+
     # Display the chosen subnet before starting the sweep
     print("-------------------------------------------------")
     print(f"Sweeping: \033[36m{cidr_subnet}\033[0m")
