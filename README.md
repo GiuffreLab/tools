@@ -27,7 +27,7 @@ Broom is designed to quickly sweep a subnet for active IP addresses by pinging e
 
 2. Follow the prompts:
     - Enter the IP address (e.g., `192.168.1.1`).
-    - Enter the subnet mask or CIDR notation (e.g., `255.255.255.0` or `/24`).
+    - Enter the subnet mask or CIDR notation (e.g., `255.255.255.0` or `24`).
 
 ### Example
 
@@ -66,7 +66,7 @@ Lens calculates and displays the network address, broadcast address, and usable 
 
 2. Follow the prompts:
     - Enter the IP address (e.g., `192.168.1.1`).
-    - Enter the subnet mask or CIDR notation (e.g., `255.255.255.0` or `/24`).
+    - Enter the subnet mask or CIDR notation (e.g., `255.255.255.0` or `24`).
 
 ### Example
 
