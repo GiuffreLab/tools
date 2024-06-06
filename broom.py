@@ -1,14 +1,16 @@
 #!/usr/bin/env python
 
-import os
-import subprocess
-import ipaddress
-from concurrent.futures import ThreadPoolExecutor
-from colorama import Fore, Style, init
+import os  # Importing os for user and privilege checks
+import subprocess  # Importing subprocess to run system commands
+import ipaddress  # Importing ipaddress for network calculations
+from concurrent.futures import ThreadPoolExecutor  # Importing ThreadPoolExecutor for parallel execution
+from colorama import Fore, Style, init  # Importing colorama for colored terminal output
 
+# Function to check if the script is run with root privileges
 def check_root():
     return os.geteuid() == 0
 
+# Function to display the welcome message and user information
 def welcome_message():
     user_name = os.getlogin()
     print("-------------------------------------------------")
@@ -20,6 +22,7 @@ def welcome_message():
         print("Broom is being run \033[32mwithout\033[0m Root privileges!")
     print("-------------------------------------------------")
 
+# Function to ping a host and check if it is active
 def ping_host(ip):
     try:
         result = subprocess.run(["ping", "-c", "1", "-W", "1", str(ip)], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -28,9 +31,11 @@ def ping_host(ip):
     except Exception as e:
         print(f"Error pinging {ip}: {e}")
 
+# Main function to execute the sweep
 def main():
-    init()
-    welcome_message()
+    init()  # Initialize colorama
+
+    welcome_message()  # Display welcome message
 
     # Ask for the IP address and CIDR separately
     ip = input(Fore.CYAN + "Please enter the IP address: " + Style.RESET_ALL)
@@ -50,9 +55,11 @@ def main():
     with ThreadPoolExecutor(max_workers=100) as executor:
         executor.map(ping_host, ip_list)
 
+    # Display completion message
     print("-------------------------------------------------")
     print("\033[44mSweep completed!\033[0m")
     print("-------------------------------------------------")
 
+# The following block will only execute when the script is run standalone, not when imported
 if __name__ == "__main__":
     main()
