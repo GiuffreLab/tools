@@ -11,19 +11,19 @@ import ipaddress  # Importing ipaddress for network calculations
 class NetworkInfo:
     # Static method to get the network address
     @staticmethod
-    def get_network_address(ip, subnet, type):
+    def get_network_address(ip, subnet):
         network = ipaddress.IPv4Network(f"{ip}/{subnet}", strict=False)
         return network.network_address
 
     # Static method to get the broadcast address
     @staticmethod
-    def get_broadcast_address(ip, subnet, type):
+    def get_broadcast_address(ip, subnet):
         network = ipaddress.IPv4Network(f"{ip}/{subnet}", strict=False)
         return network.broadcast_address
 
     # Static method to get the range of usable hosts
     @staticmethod
-    def get_usable_host_range(ip, subnet, type):
+    def get_usable_host_range(ip, subnet):
         network = ipaddress.IPv4Network(f"{ip}/{subnet}", strict=False)
         return list(network.hosts())
 
@@ -50,11 +50,11 @@ def welcome_message():
     user_name = os.getlogin()
     print("-------------------------------------------------")
     print("Welcome to Lens!")
-    print(f"Run by \033[35m{user_name}\033[0m")
+    print(f"Run by {Fore.MAGENTA}{user_name}{Style.RESET_ALL}")
     if check_root():
-        print("Lens is being run \033[31mwith\033[0m Root privileges!")
+        print(f"Lens is being run {Fore.RED}with{Style.RESET_ALL} Root privileges!")
     else:
-        print("Lens is being run \033[32mwithout\033[0m Root privileges!")
+        print(f"Lens is being run {Fore.GREEN}without{Style.RESET_ALL} Root privileges!")
     print("-------------------------------------------------")
 
 # The following block will only execute when the script is run standalone, not when imported
@@ -74,10 +74,9 @@ if __name__ == '__main__':
         type = 'subnet'
 
     # Create NetworkInfo object and calculate network details
-    network_info = NetworkInfo()
-    network = network_info.get_network_address(ip, subnet_or_cidr, type)
-    broadcast = network_info.get_broadcast_address(ip, subnet_or_cidr, type)
-    usable = network_info.get_usable_host_range(ip, subnet_or_cidr, type)
+    network = NetworkInfo.get_network_address(ip, subnet_or_cidr)
+    broadcast = NetworkInfo.get_broadcast_address(ip, subnet_or_cidr)
+    usable = NetworkInfo.get_usable_host_range(ip, subnet_or_cidr)
     
     # Print the results
-    network_info.print_results(network, broadcast, usable)
+    NetworkInfo.print_results(network, broadcast, usable)
