@@ -23,11 +23,12 @@ def welcome_message():
     print("-------------------------------------------------")
 
 # Function to ping a host and check if it is active
-def ping_host(ip):
+def ping_host(ip, active_hosts):
     try:
         result = subprocess.run(["ping", "-c", "1", "-W", "1", str(ip)], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         if "64 bytes" in result.stdout.decode():
             print(f"Active host found: {ip}")
+            active_hosts.append(ip)
     except Exception as e:
         print(f"Error pinging {ip}: {e}")
 
@@ -51,13 +52,19 @@ def main():
     print(f"Sweeping: \033[36m{cidr_subnet}\033[0m")
     print("-------------------------------------------------")
 
+    # List to store active hosts
+    active_hosts = []
+
     # Start the sweep
     with ThreadPoolExecutor(max_workers=100) as executor:
-        executor.map(ping_host, ip_list)
+        futures = [executor.submit(ping_host, ip, active_hosts) for ip in ip_list]
+        for future in futures:
+            future.result()  # wait for all futures to complete
 
-    # Display completion message
+    # Display completion message with the count of active hosts
     print("-------------------------------------------------")
     print("\033[44mSweep completed!\033[0m")
+    print(f"\033[44mActive hosts found: {len(active_hosts)}\033[0m")
     print("-------------------------------------------------")
 
 # The following block will only execute when the script is run standalone, not when imported
