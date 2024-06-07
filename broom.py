@@ -15,11 +15,11 @@ def welcome_message():
     user_name = os.getlogin()
     print("-------------------------------------------------")
     print("Welcome to Broom!")
-    print(f"Run by \033[35m{user_name}\033[0m")
+    print(f"Run by {Fore.MAGENTA}{user_name}{Style.RESET_ALL}")
     if check_root():
-        print("Broom is being run \033[31mwith\033[0m Root privileges!")
+        print(f"Broom is being run {Fore.RED}with{Style.RESET_ALL} Root privileges!")
     else:
-        print("Broom is being run \033[32mwithout\033[0m Root privileges!")
+        print(f"Broom is being run {Fore.GREEN}without{Style.RESET_ALL} Root privileges!")
     print("-------------------------------------------------")
 
 # Function to ping a host and check if it is active
@@ -49,7 +49,7 @@ def main():
 
     # Display the chosen subnet before starting the sweep
     print("-------------------------------------------------")
-    print(f"Sweeping: \033[36m{cidr_subnet}\033[0m")
+    print(f"Sweeping: {Fore.CYAN}{cidr_subnet}{Style.RESET_ALL}")
     print("-------------------------------------------------")
 
     # List to store active hosts
@@ -63,8 +63,8 @@ def main():
 
     # Display completion message with the count of active hosts
     print("-------------------------------------------------")
-    print("\033[44mSweep completed!\033[0m")
-    print(f"\033[44mActive hosts found: {len(active_hosts)}\033[0m")
+    print(Fore.BLUE + Style.BRIGHT + "Sweep completed!" + Style.RESET_ALL)
+    print(Fore.BLUE + Style.BRIGHT + f"Active hosts found: {len(active_hosts)}" + Style.RESET_ALL)
     print("-------------------------------------------------")
 
 # The following block will only execute when the script is run standalone, not when imported
